@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind</title>
+    <link rel="stylesheet" href="output.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body class="h-screen w-screen  bg-pink-400">
+
+  <h1 class="font-script text-7xl font-extrabold text-center mt-20">
+  Welcome!
+</h1>
+<div class="mt-16 bg-white p-6 rounded-lg shadow-md shadow-purple-600 max-w-sm mx-auto">
+<form class="flex flex-col space-y-4">
+
+    <div class="flex items-center gap-4">
+     
+
+  </div>
+
+  <div>
+    <label class="mb-1 font-bold" >Name:</label>
+    <input class="border p-2 rounded" id="name"
+             placeholder="Enter your name" >
+  </div>
+
+  
+   <div>
+    <label class="mb-1 font-bold" >Location:</label>
+    <input class="border p-2 rounded" id="location"
+             placeholder="Location" >
+  </div>
+
+  <div >
+  <label class="block mb-1 text-sm font-bold ">
+    Skill :
+  </label>
+
+  <select id="skills_dropdown">
+    <option name="skill" value="handicrafts">Handicrafts</option>
+    <option  name="skill" value="factory_worker">Factory worker</option>
+    <option  name="skill" value="nanny">Nanny</option>
+    <option  name="skill" value="cooking">Cooking</option>
+    <option  name="skill" value="farming"> Farming</option>
+    <option  name="skill" value="household">Household</option>
+    <option  name="skill" value="anganwadi">Anganwadi</option>
+    <option  name="skill" value="tailoring">Tailworing</option>
+    <option  name="skill" value="weaving">Weaving</option>
+  </select>
+</div>
+
+ <div >
+  <label class="block mb-1 text-sm font-bold ">
+    Language:
+  </label>
+
+  <select id="languages_dropdown">
+    <option name="language" value="english">English</option>
+    <option name="language" value="hindi">Hindi</option>
+    <option name="language" value="kannada">Kannada</option>
+    <option name="language" value="tamil">Tamil</option>
+    <option name="language" value="telugu">Telugu</option>
+    
+  </select>
+</div>
+
+
+
+   <button class="bg-blue-500 text-white p-2 rounded" id="save_data_btn">Save Data</button>
+
+</form>
+<script src="auth.js" ></script>
+</div>
+
+
+</html>
