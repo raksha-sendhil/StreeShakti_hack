@@ -1,5 +1,3 @@
-
-
 // 1. DATA SERVICES (The "Fake Backend")
 
 const AuthService = {
@@ -187,13 +185,6 @@ if (navbar) {
         }
     }
 
-    // 2. Make the profile picture a Logout button
-    const profileImg = navbar.querySelector('img[alt="profile"]');
-    if (profileImg) {
-        profileImg.addEventListener('click', function() {
-            if (confirm("Are you sure you want to log out?")) {
-                AuthService.logout();
-            }
-        });
-    }
+    // NOTE: The logout confirm block that was here has been completely removed!
 }
+
