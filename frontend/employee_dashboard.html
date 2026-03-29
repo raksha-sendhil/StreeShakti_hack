@@ -13,16 +13,25 @@
       <div class="h-12 bg-white w-full m-4 rounded-xl flex items-center justify-between p-1.5"  id="navbar">
         <div class="font-script text-5xl font-extrabold">StreeShakti</div>
         <div class="flex items-center space-x-2 bg-gray-100 px-4 py-2 rounded-lg">
-            <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="micIcon" class="w-5 h-5 text-gray-500 hover:text-blue-500 cursor-pointer transition-colors">
-                <path id="voice_btn"stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.727 4.73A1 1 0 0 1 7.914 5a9 9 0 1 0 12.172 12.172 1 1 0 0 1-1.183.682 8.986 8.986 0 0 1-12.933-12.933 1 1 0 0 1 .682-1.186zM19.114 5.636A9 9 0 0 0 4.886 18.364m0 0a9 9 0 0 0 12.728-12.728M4.886 18.364A1 1 0 0 0 5.073 19h3.182a1 1 0 0 1 1-.999 7.5 7.5 0 0 1 6.536-3.658 1 1 0 0 1 .999 1v3.182a1 1 0 0 1-.999 1H5.073a1 1 0 0 1-.187-1.999z" />
-            </svg>
-            <input type="text"  id="search_bar" placeholder="Search... or click mic to speak" class="bg-transparent outline-none border-none text-sm placeholder-gray-500 flex-1">
+            <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition">
+
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           fill="currentColor" 
+           viewBox="0 0 24 24" 
+           class="w-4 h-4 text-gray-600">
+
+        <path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a1 1 0 10-2 0 3 3 0 11-6 0 1 1 0 10-2 0 5 5 0 004 4.9V21h2v-2.1A5 5 0 0017 11z"/>
+
+      </svg>
+
+    </button>
+            
             <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-md text-sm font-medium transition-colors" id="go_btn">Go</button>
         </div>
-
+         <button id="training_btn">Training </button>
         <div> 
             <img id="profile_btn"
-  src="https://pngtree.com/so/profile-icon" 
+  src="woman picture .png" 
   alt="profile" 
   class="w-10 h-10 rounded-full object-cover cursor-pointer"
 /> </div>
