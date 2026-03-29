@@ -1,36 +1,11 @@
-// 1. DATA LAYER (MOCK_JOBS matching API Contract Section 10.2)
+// 1. DATA LAYER
 const MOCK_JOBS = [
-    { 
-        job_id: 'j_001', title: 'Weaver needed for 2 weeks', job_type: 'weaving',
-        location: 'Rajkot, Gujarat', is_wfh: false,
-        salary_monthly_min: 8000, salary_monthly_max: 12000,
-        employer_name: 'Meena Fabrics', rating: 4.5, total_hires: 23, is_verified: true, has_applied: false,
-        posted_at: '2025-01-15T10:30:00Z' 
-    },
-    { 
-        job_id: 'j_002', title: 'Cook needed for school canteen', job_type: 'cooking',
-        location: 'Anand, Gujarat', is_wfh: false,
-        salary_monthly_min: 5000, salary_monthly_max: 7000,
-        employer_name: 'Sunrise School', rating: 4.1, total_hires: 8, is_verified: false, has_applied: false,
-        posted_at: '2025-01-14T08:00:00Z' 
-    },
-    { 
-        job_id: 'j_003', title: 'Embroidery work from home', job_type: 'handicrafts',
-        location: 'Jamnagar, Gujarat', is_wfh: true,
-        salary_monthly_min: 4000, salary_monthly_max: 6000,
-        employer_name: 'CraftCo', rating: 3.9, total_hires: 41, is_verified: true, has_applied: false,
-        posted_at: '2025-01-13T14:00:00Z' 
-    },
-    { 
-        job_id: 'j_004', title: 'Nanny needed - flexible hours', job_type: 'nanny',
-        location: 'Vadodara, Gujarat', is_wfh: false,
-        salary_monthly_min: 6000, salary_monthly_max: 9000,
-        employer_name: 'Patel Family', rating: 4.8, total_hires: 3, is_verified: false, has_applied: false,
-        posted_at: '2025-01-12T11:00:00Z' 
-    }
+    { job_id: 'j_001', title: 'Weaver needed for 2 weeks', job_type: 'weaving', location: 'Rajkot, Gujarat', is_wfh: false, salary_monthly_min: 8000, salary_monthly_max: 12000, employer_name: 'Meena Fabrics', rating: 4.5, total_hires: 23, is_verified: true, has_applied: false, posted_at: '2025-01-15T10:30:00Z' },
+    { job_id: 'j_002', title: 'Cook needed for school canteen', job_type: 'cooking', location: 'Anand, Gujarat', is_wfh: false, salary_monthly_min: 5000, salary_monthly_max: 7000, employer_name: 'Sunrise School', rating: 4.1, total_hires: 8, is_verified: false, has_applied: false, posted_at: '2025-01-14T08:00:00Z' },
+    { job_id: 'j_003', title: 'Embroidery work from home', job_type: 'handicrafts', location: 'Jamnagar, Gujarat', is_wfh: true, salary_monthly_min: 4000, salary_monthly_max: 6000, employer_name: 'CraftCo', rating: 3.9, total_hires: 41, is_verified: true, has_applied: false, posted_at: '2025-01-13T14:00:00Z' },
+    { job_id: 'j_004', title: 'Nanny needed - flexible hours', job_type: 'nanny', location: 'Vadodara, Gujarat', is_wfh: false, salary_monthly_min: 6000, salary_monthly_max: 9000, employer_name: 'Patel Family', rating: 4.8, total_hires: 3, is_verified: false, has_applied: false, posted_at: '2025-01-12T11:00:00Z' }
 ];
 
-// Helper from API Contract Section 10.7
 function formatSalary(min, max) {
     if (min === max) return '₹' + min.toLocaleString('en-IN') + '/month';
     return '₹' + min.toLocaleString('en-IN') + ' – ₹' + max.toLocaleString('en-IN') + '/month';
@@ -41,6 +16,8 @@ const JobService = {
     getJobs: async function(filters = {}) {
         return MOCK_JOBS.filter(job => {
             const matchesSkill = filters.skills?.length ? filters.skills.includes(job.job_type) : true;
+            const matchesLocation = filters.locations?.length ? filters.locations.some(city => job.location.includes(city)) : true;
+            
             let matchesWfh = true;
             if (filters.wfhs?.length) {
                 const wantsWfh = filters.wfhs.includes('yes');
@@ -58,7 +35,7 @@ const JobService = {
                     return true;
                 });
             }
-            return matchesSkill && matchesWfh && matchesSalary;
+            return matchesSkill && matchesLocation && matchesWfh && matchesSalary;
         });
     }
 };
@@ -103,6 +80,7 @@ function renderJobs(jobsArray) {
 async function handleFilters() {
     const activeFilters = {
         skills: Array.from(document.querySelectorAll('input[name="filter_skill"]:checked')).map(el => el.value),
+        locations: Array.from(document.querySelectorAll('input[name="filter_location"]:checked')).map(el => el.value),
         salaries: Array.from(document.querySelectorAll('input[name="filter_salary"]:checked')).map(el => el.value),
         wfhs: Array.from(document.querySelectorAll('input[name="filter_wfh"]:checked')).map(el => el.value)
     };
@@ -114,9 +92,9 @@ function applyForJob(jobId) {
     window.location.href = 'job_detail.html?job_id=' + jobId; 
 }
 
-// 4. NAVIGATION & GREETING CONTROLLER
+// 4. NAVIGATION & GREETING CONTROLLER (Your Changes)
 window.onload = async () => {
-    // A. Greeting logic (Matches your screenshot!)
+    // Dynamic Greeting 
     const userName = localStorage.getItem('userName');
     const titleElement = document.querySelector('.font-script');
     if (userName && titleElement) {
@@ -124,22 +102,22 @@ window.onload = async () => {
         titleElement.classList.replace('text-5xl', 'text-4xl');
     }
 
-    // B. Initial Job Load
+    // Initial Load
     const allJobs = await JobService.getJobs({});
     renderJobs(allJobs);
 
-    // C. Click Listeners (Strictly Navigation)
+    // Filter Apply Button
+    if (applyBtn) applyBtn.addEventListener('click', handleFilters);
+
+    // Profile Click Logic (NO LOGOUT POPUPS!)
     const profileBtn = document.getElementById('profile_btn');
     if (profileBtn) {
         profileBtn.onclick = () => { window.location.href = 'profile.html'; };
     }
 
+    // Training Click Logic
     const trainingBtn = document.getElementById('training_btn');
     if (trainingBtn) {
         trainingBtn.onclick = () => { window.location.href = 'training.html'; };
-    }
-
-    if (applyBtn) {
-        applyBtn.addEventListener('click', handleFilters);
     }
 };
