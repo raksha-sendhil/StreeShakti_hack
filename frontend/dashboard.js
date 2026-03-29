@@ -89,7 +89,7 @@ async function handleFilters() {
 }
 
 function applyForJob(jobId) {
-    window.location.href = 'job_detail.html?job_id=' + jobId; 
+    window.location.href = 'job_details.html?job_id=' + jobId; 
 }
 
 // 4. NAVIGATION & GREETING CONTROLLER (Your Changes)
